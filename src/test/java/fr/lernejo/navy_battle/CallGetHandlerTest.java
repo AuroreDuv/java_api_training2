@@ -21,7 +21,7 @@ class CallGetHandlerTest {
         InputStreamReader isr = new InputStreamReader(is);
         BufferedReader br = new BufferedReader(isr);
 
-        Assertions.assertEquals("Hello", br.readLine());
+        Assertions.assertEquals("**OK**", br.readLine());
 
         p.destroy();
         launcher.stop_server();
