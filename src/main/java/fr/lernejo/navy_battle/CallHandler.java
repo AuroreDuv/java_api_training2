@@ -36,7 +36,7 @@ class CallPostHandler implements HttpHandler {
             schema.validate(new JSONObject(new JSONTokener(inputRequestBody)));
 
             // Send response with status Accepted 202
-            body = "{\"id\": \"2aca7611-0ae4-49f3-bf63-75bef4769028\", \"url\": \"http://localhost:9876\", \"message\": \"May the best code win\"}";
+            body = "{\"id\": \"2aca7611-0ae4-49f3-bf63-75bef4769028\", \"url\": \"http://" + exchange.getRequestHeaders().getFirst("Host") + "\", \"message\": \"May the best code win\"}";
             exchange.sendResponseHeaders(202, body.length());
         } catch (Exception e) {
             body = "Bad Request";
