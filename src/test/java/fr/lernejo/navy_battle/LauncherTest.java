@@ -6,7 +6,7 @@ class LauncherTest {
     @Test
     void main_call() throws Exception {
         String[] args = {"9876"};
-        Launcher laun = new Launcher();
-        laun.main(args);
+        Launcher launcher = new Launcher();
+        launcher.main(args);
     }
 }
