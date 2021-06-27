@@ -19,9 +19,6 @@ class CallGetHandler implements HttpHandler {
 
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(body.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
         }
     }
 }
