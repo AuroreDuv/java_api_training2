@@ -39,7 +39,7 @@ class CallPostHandler implements HttpHandler {
             body = "{\"id\": \"2aca7611-0ae4-49f3-bf63-75bef4769028\", \"url\": \"http://localhost:9876\", \"message\": \"May the best code win\"}";
             exchange.sendResponseHeaders(202, body.length());
         } catch (Exception e) {
-            body = "Bad request";
+            body = "Bad Request";
             exchange.sendResponseHeaders(400, body.length());
             e.printStackTrace();
         }
