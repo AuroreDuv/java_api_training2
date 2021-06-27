@@ -12,7 +12,8 @@ public class Launcher {
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         ExecutorService executor = Executors.newFixedThreadPool(1);
-        server.createContext("/ping", new CallHandler());
+        server.createContext("/ping", new CallGetHandler());
+        server.createContext("/api/game/start", new CallPostHandler());
         server.setExecutor(executor);
         server.start();
     }
