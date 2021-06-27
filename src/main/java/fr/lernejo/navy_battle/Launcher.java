@@ -8,8 +8,6 @@ import java.util.concurrent.ExecutorService;
 
 public class Launcher {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello World");
-
         int port = Integer.parseInt(args[1]);
 
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
