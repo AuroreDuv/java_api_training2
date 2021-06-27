@@ -1,5 +1,6 @@
 package fr.lernejo.navy_battle;
 
+import com.sun.net.httpserver.HttpServer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ class CallGetHandlerTest {
     void get_handler_test_ping_prints_hello() throws Exception {
         int port = 9876;
         Launcher launcher = new Launcher();
-        launcher.start_server(port);
+        HttpServer server = launcher.start_server(port);
 
         ProcessBuilder pb = new ProcessBuilder("curl", "http://localhost:9876/ping");
         Process p = pb.start();
@@ -24,6 +25,6 @@ class CallGetHandlerTest {
         Assertions.assertEquals("OK", br.readLine());
 
         p.destroy();
-        launcher.stop_server();
+        launcher.stop_server(server);
     }
 }

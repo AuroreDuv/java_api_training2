@@ -8,9 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Launcher {
-    private HttpServer server;
-
-    public void start_server(int port) throws IOException {
+    public HttpServer start_server(int port) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         ExecutorService executor = Executors.newFixedThreadPool(1);
         server.createContext("/ping", new CallGetHandler());
@@ -18,11 +16,11 @@ public class Launcher {
         server.setExecutor(executor);
         server.start();
 
-        this.server = server;
+        return server;
     }
 
-    public void stop_server() {
-        this.server.stop(0);
+    public void stop_server(HttpServer server) {
+        server.stop(0);
     }
 
     public static void main(String[] args) throws IOException {
