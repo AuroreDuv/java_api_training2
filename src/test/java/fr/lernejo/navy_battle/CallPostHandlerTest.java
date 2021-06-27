@@ -1,14 +1,11 @@
 package fr.lernejo.navy_battle;
 
-import org.json.JSONException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CallPostHandlerTest {
     @Test
