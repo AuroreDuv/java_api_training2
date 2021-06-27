@@ -9,12 +9,12 @@ import java.net.Socket;
 class LauncherTest {
     @Test
     void main_call() throws Exception {
-        String[] args = {"9876"};
-        Launcher launcher = new Launcher();
-        launcher.main(args);
+        int port = 9875;
+        String[] args = {Integer.toString(port)};
+        Launcher.main(args);
 
-        try (Socket s = new Socket("localhost", 9876)) {
-        } catch (IOException ex) {
+        try (Socket s = new Socket("localhost", port)) {
+        } catch (IOException e) {
             Assertions.fail("Server not started");
         }
     }
