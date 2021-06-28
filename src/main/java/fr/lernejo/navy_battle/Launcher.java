@@ -4,6 +4,9 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -26,8 +29,18 @@ public class Launcher {
     public static void main(String[] args) throws IOException {
         int port = Integer.parseInt(args[0]);
 
-        Launcher launcher = new Launcher();
+        if (args.length != 1) {
+            String adversaryUrl = args[1];
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(adversaryUrl + "/api/game/start"))
+                .setHeader("Accept", "application/json")
+                .setHeader("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString("{\"id\":\"1\", \"url\":\"http://localhost:" + port + "\", \"message\":\"hello\"}"))
+                .build();
+        }
 
+        Launcher launcher = new Launcher();
         launcher.start_server(port);
     }
 }
