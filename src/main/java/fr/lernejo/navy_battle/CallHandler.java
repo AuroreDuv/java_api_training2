@@ -27,23 +27,14 @@ class CallPostHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         String body;
         try (InputStream inputSchema = getClass().getResourceAsStream("/schema.json")) { // Get Json Schema for validation
-            // Get request Body (POST)
-            InputStream inputRequestBody = exchange.getRequestBody();
-
-            // Json Schema Validation
-            JSONObject rawSchema = new JSONObject(new JSONTokener(inputSchema));
-            Schema schema = SchemaLoader.load(rawSchema);
-            schema.validate(new JSONObject(new JSONTokener(inputRequestBody)));
-
+            SchemaLoader.load(new JSONObject(new JSONTokener(inputSchema))).validate(new JSONObject(new JSONTokener(exchange.getRequestBody()))); // Json Schema Validation
             // Send response with status Accepted 202
             body = "{\"id\": \"2aca7611-0ae4-49f3-bf63-75bef4769028\", \"url\": \"http://" + exchange.getRequestHeaders().getFirst("Host") + "\", \"message\": \"May the best code win\"}";
             exchange.sendResponseHeaders(202, body.length());
         } catch (Exception e) {
             body = "Bad Request";
             exchange.sendResponseHeaders(400, body.length());
-            e.printStackTrace();
         }
-
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(body.getBytes());
         }
