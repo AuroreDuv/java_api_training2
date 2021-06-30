@@ -27,8 +27,14 @@ public class Fire implements HttpHandler {
     }
 
     public String constructResponseBody(HttpExchange exchange) throws IOException {
-        String body;
-        body = "{\"consequence\": \"miss\", \"shipLeft\": true}";
+        String cell = exchange.getRequestURI().getQuery().replace("cell=", "");
+        int x = Integer.parseInt(cell.replace(Character.toString(cell.charAt(0)), "")) - 1;
+        int y = cell.charAt(0) - 65;
+        exchange.getResponseHeaders();
+        String shipState; Boolean shipLeft; String body;
+        shipState = getConsequence(x, y);
+        shipLeft = gameGrid.isShipLeftOnGrid();
+        body = "{\"consequence\": \"" + shipState + "\", \"shipLeft\": " + shipLeft + "}";
         exchange.sendResponseHeaders(202, body.length());
         return body;
     }
