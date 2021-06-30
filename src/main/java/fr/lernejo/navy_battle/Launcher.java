@@ -4,7 +4,6 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -18,6 +17,7 @@ public class Launcher {
         ExecutorService executor = Executors.newFixedThreadPool(1);
         server.createContext("/ping", new CallGetHandler());
         server.createContext("/api/game/start", new CallPostHandler());
+        server.createContext("/api/game/fire", new Fire());
         server.setExecutor(executor);
         server.start();
 
