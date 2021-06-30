@@ -44,7 +44,6 @@ public class Fire implements HttpHandler {
 
         try {
             body = constructResponseBody(exchange);
-            exchange.sendResponseHeaders(202, body.length());
         } catch (Exception e) {
             body = "Bad Request";
             exchange.sendResponseHeaders(400, body.length());
