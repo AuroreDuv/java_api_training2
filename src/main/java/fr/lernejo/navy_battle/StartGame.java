@@ -18,7 +18,7 @@ class StartGame implements HttpHandler {
             JSONObject request = new JSONObject(new JSONTokener(exchange.getRequestBody()));
             SchemaLoader.load(new JSONObject(new JSONTokener(inputSchema))).validate(request); // Json Schema Validation
             // Send response with status Accepted 202
-            body = "{\"id\": \"2aca7611-0ae4-49f3-bf63-75bef4769028\", \"url\": \"http://localhost:" + exchange.getRemoteAddress().getPort() + "\", \"message\": \"May the best code win\"}";
+            body = "{\"id\": \"2aca7611-0ae4-49f3-bf63-75bef4769028\", \"url\": \"http://localhost:" + Integer.toString(exchange.getRemoteAddress().getPort()) + "\", \"message\": \"May the best code win\"}";
             exchange.sendResponseHeaders(202, body.length());
 
             ProcessBuilder pb = new ProcessBuilder("curl", request.get("url").toString() + "/api/game/fire?cell=B2");
