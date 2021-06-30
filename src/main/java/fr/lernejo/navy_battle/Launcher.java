@@ -55,8 +55,6 @@ public class Launcher {
 
     public static void main(String[] args) throws IOException {
         int port = Integer.parseInt(args[0]);
-        Launcher launcher = new Launcher();
-        launcher.startServer(port);
 
         if (args.length != 1) {
             String adversaryUrl = args[1];
@@ -69,5 +67,8 @@ public class Launcher {
                 .build();
             client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
         }
+
+        Launcher launcher = new Launcher();
+        launcher.startServer(port);
     }
 }
