@@ -14,7 +14,7 @@ public class Fire implements HttpHandler {
     }
 
     public String getConsequence(int x, int y) {
-        Ship ship = gameGrid.get_grid()[x][y];
+        Ship ship = null;
         if (ship != null) {
             gameGrid.hitShip(x, y);
             if (ship.isAlive(gameGrid)) {
@@ -44,7 +44,7 @@ public class Fire implements HttpHandler {
         System.out.print(String.format("\033[H\033[2J"));
 
         try {
-            body = "{\"consequence\": \"miss\", \"shipLeft\": true}";
+            body = constructResponseBody(exchange);
         } catch (Exception e) {
             body = "Bad Request";
             exchange.sendResponseHeaders(400, body.length());
