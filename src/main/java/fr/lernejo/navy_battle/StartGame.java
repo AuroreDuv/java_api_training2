@@ -22,7 +22,6 @@ class StartGame implements HttpHandler {
             exchange.sendResponseHeaders(202, body.length());
 
             ProcessBuilder pb = new ProcessBuilder("curl", request.get("url").toString() + "/api/game/fire?cell=B2");
-            System.out.println(request.get("url").toString());
             pb.start();
         } catch (Exception e) {
             body = "Bad Request";

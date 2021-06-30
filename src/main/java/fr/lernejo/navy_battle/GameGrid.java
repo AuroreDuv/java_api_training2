@@ -80,7 +80,7 @@ class GameGrid {
     }
 
     public Boolean isShipLeftOnGrid() {
-        for(int i = 0; i < this.width ; i++) {
+        for(int i = 0; i < this.width; i++) {
             for (int j = 0; j < this.height; j++) {
                 if(this.grid[i][j] != null) {
                     return true;

@@ -27,14 +27,8 @@ public class Fire implements HttpHandler {
     }
 
     public String constructResponseBody(HttpExchange exchange) throws IOException {
-        String cell = exchange.getRequestURI().getQuery().replace("cell=", "");
-        int x = Integer.parseInt(cell.replace(Character.toString(cell.charAt(0)), "")) - 1;
-        int y = cell.charAt(0) - 65;
-        exchange.getResponseHeaders().set("Content-type", "application/json");
-        String shipState; Boolean shipLeft; String body;
-        shipState = getConsequence(x, y);
-        shipLeft = gameGrid.isShipLeftOnGrid();
-        body = "{\"consequence\": \"" + shipState + "\", \"shipLeft\": " + shipLeft + "}";
+        String body;
+        body = "{\"consequence\": \"miss\", \"shipLeft\": true}";
         exchange.sendResponseHeaders(202, body.length());
         return body;
     }
@@ -45,8 +39,7 @@ public class Fire implements HttpHandler {
 
         try {
             body = constructResponseBody(exchange);
-        } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
             body = "Bad Request";
             exchange.sendResponseHeaders(400, body.length());
         }
