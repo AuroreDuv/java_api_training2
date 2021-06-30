@@ -50,7 +50,6 @@ public class Fire implements HttpHandler {
             exchange.sendResponseHeaders(400, body.length());
         }
         Launcher launcher = new Launcher();
-        launcher.displayGrid(gameGrid);
 
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(body.getBytes());
