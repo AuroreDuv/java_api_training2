@@ -17,7 +17,6 @@ public class Launcher {
         ExecutorService executor = Executors.newFixedThreadPool(1);
         server.createContext("/ping", new CallGetHandler());
         server.createContext("/api/game/start", new CallPostHandler());
-        server.createContext("/api/game/fire", new Fire());
         server.setExecutor(executor);
         server.start();
 
