@@ -30,12 +30,11 @@ public class Fire implements HttpHandler {
         String cell = exchange.getRequestURI().getQuery().replace("cell=", "");
         int x = Integer.parseInt(cell.replace(Character.toString(cell.charAt(0)), "")) - 1;
         int y = cell.charAt(0) - 65;
-        exchange.getResponseHeaders();
+        exchange.getResponseHeaders().set("Content-type", "application/json");
         String shipState; Boolean shipLeft; String body;
         shipState = getConsequence(x, y);
         shipLeft = gameGrid.isShipLeftOnGrid();
         body = "{\"consequence\": \"" + shipState + "\", \"shipLeft\": " + shipLeft + "}";
-        exchange.sendResponseHeaders(202, body.length());
         return body;
     }
 
@@ -45,6 +44,7 @@ public class Fire implements HttpHandler {
 
         try {
             body = constructResponseBody(exchange);
+            exchange.sendResponseHeaders(202, body.length());
         } catch (Exception e) {
             body = "Bad Request";
             exchange.sendResponseHeaders(400, body.length());
