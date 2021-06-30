@@ -61,7 +61,8 @@ public class Launcher {
         if (args.length != 1) {
             String adversaryUrl = args[1];
             HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder().uri(URI.create(adversaryUrl + "/api/game/start"))
+            HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(adversaryUrl + "/api/game/start"))
                 .setHeader("Accept", "application/json")
                 .setHeader("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString("{\"id\":\"1\", \"url\":\"http://localhost:" + port + "\", \"message\":\"hello\"}"))

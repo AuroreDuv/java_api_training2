@@ -46,7 +46,6 @@ public class Fire implements HttpHandler {
             body = constructResponseBody(exchange);
         } catch (Exception e) {
             body = "Bad Request";
-            exchange.sendResponseHeaders(400, body.length());
         }
         Launcher launcher = new Launcher();
         launcher.displayGrid(gameGrid);
