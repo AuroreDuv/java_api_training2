@@ -30,6 +30,7 @@ public class Fire implements HttpHandler {
         String cell = exchange.getRequestURI().getQuery().replace("cell=", "");
         int x = Integer.parseInt(cell.replace(Character.toString(cell.charAt(0)), "")) - 1;
         int y = cell.charAt(0) - 65;
+        exchange.getResponseHeaders().set("Content-type", "application/json");
         String shipState; Boolean shipLeft; String body;
         shipState = getConsequence(x, y);
         shipLeft = gameGrid.isShipLeftOnGrid();

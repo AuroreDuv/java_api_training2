@@ -20,9 +20,6 @@ class StartGame implements HttpHandler {
             // Send response with status Accepted 202
             body = "{\"id\": \"2aca7611-0ae4-49f3-bf63-75bef4769028\", \"url\": \"http://" + exchange.getRequestHeaders().getFirst("Host") + "\", \"message\": \"May the best code win\"}";
             exchange.sendResponseHeaders(202, body.length());
-
-            ProcessBuilder pb = new ProcessBuilder("curl", request.get("url") + "/api/game/fire?cell=B2");
-            Process p = pb.start();
         } catch (Exception e) {
             body = "Bad Request";
             exchange.sendResponseHeaders(400, body.length());
