@@ -49,9 +49,5 @@ public class Fire implements HttpHandler {
         }
         Launcher launcher = new Launcher();
         launcher.displayGrid(gameGrid);
-
-        try (OutputStream os = exchange.getResponseBody()) {
-            os.write(body.getBytes());
-        }
     }
 }
