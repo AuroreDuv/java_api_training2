@@ -65,7 +65,7 @@ public class Launcher {
                 .uri(URI.create(adversaryUrl + "/api/game/start"))
                 .setHeader("Accept", "application/json")
                 .setHeader("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("{\"id\":\"1\", \"url\":\"http://localhost:" + port + "\", \"message\":\"hello\"}"))
+                .POST(HttpRequest.BodyPublishers.ofString("{\"id\":\"1\", \"url\": \"http://localhost:" + port + "\", \"message\": \"hello\"}"))
                 .build();
             client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
         }
