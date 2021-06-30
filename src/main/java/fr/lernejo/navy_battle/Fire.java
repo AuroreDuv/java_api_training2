@@ -27,7 +27,7 @@ public class Fire implements HttpHandler {
     }
 
     public String constructResponseBody(HttpExchange exchange) throws IOException {
-        String cell = "B2";
+        String cell = exchange.getRequestURI().getQuery().replace("cell=", "");
         int x = Integer.parseInt(cell.replace(Character.toString(cell.charAt(0)), "")) - 1;
         int y = cell.charAt(0) - 65;
         exchange.getResponseHeaders().set("Content-type", "application/json");
@@ -45,7 +45,8 @@ public class Fire implements HttpHandler {
 
         try {
             body = constructResponseBody(exchange);
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
             body = "Bad Request";
             exchange.sendResponseHeaders(400, body.length());
         }
