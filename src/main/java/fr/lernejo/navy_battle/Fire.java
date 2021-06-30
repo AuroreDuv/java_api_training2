@@ -28,8 +28,8 @@ public class Fire implements HttpHandler {
 
     public String constructResponseBody(HttpExchange exchange) throws IOException {
         String cell = exchange.getRequestURI().getQuery().replace("cell=", "");
-        int x = 1;
-        int y = 2;
+        int x = Integer.parseInt(cell.replace(Character.toString(cell.charAt(0)), "")) - 1;
+        int y = cell.charAt(0) - 65;
         exchange.getResponseHeaders().set("Content-type", "application/json");
         String shipState; Boolean shipLeft; String body;
         shipState = getConsequence(x, y);
@@ -44,7 +44,7 @@ public class Fire implements HttpHandler {
         System.out.print(String.format("\033[H\033[2J"));
 
         try {
-            body = constructResponseBody(exchange);
+            body = "{\"consequence\": \"miss\", \"shipLeft\": true}";
         } catch (Exception e) {
             body = "Bad Request";
             exchange.sendResponseHeaders(400, body.length());
