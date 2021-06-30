@@ -28,8 +28,8 @@ public class Fire implements HttpHandler {
 
     public String constructResponseBody(HttpExchange exchange) throws IOException {
         String cell = exchange.getRequestURI().getQuery().replace("cell=", "");
-        int x = Integer.parseInt(cell.replace(Character.toString(cell.charAt(0)), "")) - 1;
-        int y = cell.charAt(0) - 65;
+        int x = 1;
+        int y = 2;
         exchange.getResponseHeaders().set("Content-type", "application/json");
         String shipState; Boolean shipLeft; String body;
         shipState = getConsequence(x, y);
