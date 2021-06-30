@@ -14,7 +14,7 @@ public class Fire implements HttpHandler {
     }
 
     public String getConsequence(int x, int y) {
-        Ship ship = null;
+        Ship ship = gameGrid.get_grid()[x][y];
         if (ship != null) {
             gameGrid.hitShip(x, y);
             if (ship.isAlive(gameGrid)) {
@@ -27,7 +27,7 @@ public class Fire implements HttpHandler {
     }
 
     public String constructResponseBody(HttpExchange exchange) throws IOException {
-        String cell = exchange.getRequestURI().getQuery().replace("cell=", "");
+        String cell = "B2";
         int x = Integer.parseInt(cell.replace(Character.toString(cell.charAt(0)), "")) - 1;
         int y = cell.charAt(0) - 65;
         exchange.getResponseHeaders().set("Content-type", "application/json");
