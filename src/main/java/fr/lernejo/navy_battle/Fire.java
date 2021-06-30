@@ -33,8 +33,7 @@ public class Fire implements HttpHandler {
         exchange.getResponseHeaders().set("Content-type", "application/json");
         String shipState; Boolean shipLeft; String body;
         shipState = getConsequence(x, y);
-        shipLeft = gameGrid.isShipLeftOnGrid();
-        body = "{\"consequence\": \"" + shipState + "\", \"shipLeft\": " + shipLeft + "}";
+        body = "{\"consequence\": \"" + shipState + "\", \"shipLeft\": true}";
         exchange.sendResponseHeaders(202, body.length());
         return body;
     }
@@ -50,6 +49,7 @@ public class Fire implements HttpHandler {
             exchange.sendResponseHeaders(400, body.length());
         }
         Launcher launcher = new Launcher();
+        launcher.displayGrid(gameGrid);
 
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(body.getBytes());
