@@ -7,23 +7,11 @@ import java.io.OutputStream;
 import java.io.InputStream;
 import java.io.IOException;
 
-import org.everit.json.schema.Schema;
 import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-class CallGetHandler implements HttpHandler {
-    public void handle(HttpExchange exchange) throws IOException {
-        String body = "OK";
-        exchange.sendResponseHeaders(200, body.length());
-
-        try (OutputStream os = exchange.getResponseBody()) {
-            os.write(body.getBytes());
-        }
-    }
-}
-
-class CallPostHandler implements HttpHandler {
+class StartGame implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         String body;
         try (InputStream inputSchema = getClass().getResourceAsStream("/schema.json")) { // Get Json Schema for validation
